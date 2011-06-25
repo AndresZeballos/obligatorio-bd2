@@ -22,7 +22,7 @@ public class Marca {
 	private String marca;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "modelo")
 	private List<Modelo> modelos;
 
 	public Marca() {
