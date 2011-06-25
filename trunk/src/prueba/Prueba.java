@@ -25,8 +25,8 @@ public class Prueba {
 		EntityManager em = emf.createEntityManager();
 
 		em.getTransaction().begin();
-		Marca ev = (Marca) em.find(Marca.class, 1);
-		System.out.println(ev + "\n");
+		Marca m = (Marca) em.find(Marca.class, 1);
+		System.out.println(m.getMarca() + "\n");
 		em.getTransaction().commit();
 
 		/*
