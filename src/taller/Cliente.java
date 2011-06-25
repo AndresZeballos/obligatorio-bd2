@@ -2,13 +2,26 @@ package taller;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 public class Cliente {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
 	private int id;
 	private String nombre;
 	private String apellido;
 	private String direccion;
 	private int telefono;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	private List<Auto> autos;
 
 	public Cliente() {
