@@ -3,12 +3,16 @@ package taller;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "clientes")
 public class Cliente {
 
 	@Id
@@ -21,7 +25,7 @@ public class Cliente {
 	private int telefono;
 	
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "auto")
 	private List<Auto> autos;
 
 	public Cliente() {

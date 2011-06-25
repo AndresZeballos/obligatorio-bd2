@@ -4,14 +4,17 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "autos")
 public class Auto {
 
 	@Id
@@ -23,22 +26,22 @@ public class Auto {
 	@Column(name = "anio")
 	private Date año;
 	private String color;
-	private int chasis;
+	private String chasis;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "marca")
 	private Marca marca;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "modelo")
 	private Modelo modelo;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "cliente")
 	private Cliente cliente;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "presupuesto")
 	private List<Presupuesto> presupuestos;
 
 	public Auto() {
@@ -77,11 +80,11 @@ public class Auto {
 		this.color = color;
 	}
 
-	public int getChasis() {
+	public String getChasis() {
 		return chasis;
 	}
 
-	public void setChasis(int chasis) {
+	public void setChasis(String chasis) {
 		this.chasis = chasis;
 	}
 
