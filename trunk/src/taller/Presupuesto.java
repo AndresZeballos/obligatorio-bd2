@@ -3,13 +3,26 @@ package taller;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Presupuesto {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
 	private int id;
 	private Date fecha;
-	private Time tiempoReparacion;
+	private int tiempoReparacion;
 	private int costoReparacion;
 	private boolean aceptado;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	private Auto auto;
 
 	public Presupuesto() {
@@ -32,11 +45,11 @@ public class Presupuesto {
 		this.fecha = fecha;
 	}
 
-	public Time getTiempoReparacion() {
+	public int getTiempoReparacion() {
 		return tiempoReparacion;
 	}
 
-	public void setTiempoReparacion(Time tiempoReparacion) {
+	public void setTiempoReparacion(int tiempoReparacion) {
 		this.tiempoReparacion = tiempoReparacion;
 	}
 

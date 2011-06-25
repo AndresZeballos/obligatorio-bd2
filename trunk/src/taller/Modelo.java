@@ -1,9 +1,22 @@
 package taller;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Modelo {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
 	private int id;
 	private String modelo;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
 	private Marca marca;
 
 	public Modelo() {
