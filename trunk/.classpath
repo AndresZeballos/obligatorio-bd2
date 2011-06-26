@@ -12,6 +12,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/jta-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.0.4-bin.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Andres/Dropbox/WorkspaceObligatorioBD2/ObligatorioBD2/lib/slf4j-nop-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/workspace/ObligatorioBD2/lib/slf4j-nop-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
