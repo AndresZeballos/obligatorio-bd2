@@ -1,5 +1,6 @@
 package taller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -23,6 +24,7 @@ public class Cliente {
 	private String apellido;
 	private String direccion;
 	private int telefono;
+	private Date baja;
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "auto")
@@ -78,6 +80,21 @@ public class Cliente {
 
 	public void setAutos(List<Auto> autos) {
 		this.autos = autos;
+	}
+
+	public Date getBaja() {
+		return baja;
+	}
+
+	public void setBaja(Date baja) {
+		this.baja = baja;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido="
+				+ apellido + ", direccion=" + direccion + ", telefono="
+				+ telefono + ", baja=" + baja + "]";
 	}
 
 }
