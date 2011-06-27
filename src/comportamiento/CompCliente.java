@@ -14,7 +14,7 @@ import taller.Cliente;
 import taller.Presupuesto;
 
 public class CompCliente {
-
+	@SuppressWarnings({ "rawtypes" })
 	public void altaCliente(String nombre, String apellido, String direccion, int telefono, List<Auto> autos){
 		//asumimos que los autos que se pasan por parametro ya existen en la BD
 		//no se hace control sobre duplicados de personas ya que no se cuenta con el documento de la misma

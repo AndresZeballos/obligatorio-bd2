@@ -24,6 +24,7 @@ import taller.Marca;
 import taller.Modelo;
 
 public class CompAuto {
+	@SuppressWarnings({ "rawtypes" })
 	public void altaAuto(String matricula, Date año, String color, String chasis, Marca marca, Modelo modelo, Cliente cliente){
 		//se chequea que no existe un auto con igual numero de matricula o chasis, en caso de que ya exista, no hago nada
 		try {

@@ -74,4 +74,30 @@ public class CompPresupuesto {
 		}
 		return p;
 	}
+	
+	@SuppressWarnings({ "rawtypes" })
+	public void aceptarPresupuesto(Presupuesto presupuesto){
+		try {
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
+					"obligatorio", new HashMap());
+			EntityManager em = emf.createEntityManager();
+			try {
+				em.getTransaction().begin();
+				presupuesto.setAceptado(true);
+				
+				em.getTransaction().commit();
+			}catch(javax.persistence.RollbackException ex)
+			{
+				System.out.println("Error: " + ex.getMessage());
+			}
+			finally
+			{
+				em.close();
+				emf.close();
+			}
+		}catch(Exception ex)
+		{
+			System.out.println("Error: " + ex.getMessage());
+		}
+	}
 }
