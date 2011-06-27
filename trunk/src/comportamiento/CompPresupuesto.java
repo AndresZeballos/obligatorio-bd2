@@ -16,26 +16,30 @@ public class CompPresupuesto {
 	@SuppressWarnings("rawtypes")
 	public void altaPresupuesto(Date fecha, int tiempoReparacion,
 			int costoReparacion, Auto auto) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(
-				"obligatorio", new HashMap());
-		EntityManager em = emf.createEntityManager();
 		try {
-			em.getTransaction().begin();
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
+					"obligatorio", new HashMap());
+			EntityManager em = emf.createEntityManager();
+			try {
+				em.getTransaction().begin();
 
-			Presupuesto p = new Presupuesto();
-			p.setFecha(fecha);
-			p.setTiempoReparacion(tiempoReparacion);
-			p.setCostoReparacion(costoReparacion);
-			p.setAuto(auto);
+				Presupuesto p = new Presupuesto();
+				p.setFecha(fecha);
+				p.setTiempoReparacion(tiempoReparacion);
+				p.setCostoReparacion(costoReparacion);
+				p.setAuto(auto);
 
-			em.persist(p);
+				em.persist(p);
 
-			em.getTransaction().commit();
-		} catch (javax.persistence.RollbackException ex) {
-			System.out.println("Error: " + ex.getMessage());
-		} finally {
-			em.close();
-			emf.close();
+				em.getTransaction().commit();
+			} catch (javax.persistence.RollbackException ex) {
+				System.out.println("Error: " + ex.getMessage());
+			} finally {
+				em.close();
+				emf.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
