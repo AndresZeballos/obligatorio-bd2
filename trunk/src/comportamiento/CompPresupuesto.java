@@ -16,11 +16,10 @@ public class CompPresupuesto {
 	@SuppressWarnings("rawtypes")
 	public void altaPresupuesto(Date fecha, int tiempoReparacion,
 			int costoReparacion, Auto auto) {
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory(
+				"obligatorio", new HashMap());
+		EntityManager em = emf.createEntityManager();
 		try {
-			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
-					"obligatorio", new HashMap());
-			EntityManager em = emf.createEntityManager();
-			
 			em.getTransaction().begin();
 
 			Presupuesto p = new Presupuesto();
@@ -32,40 +31,43 @@ public class CompPresupuesto {
 			em.persist(p);
 
 			em.getTransaction().commit();
-			
-			em.close();
-			emf.close();
 		} catch (javax.persistence.RollbackException ex) {
 			System.out.println("Error: " + ex.getMessage());
+		} finally {
+			em.close();
+			emf.close();
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes" })
 	public long reparacionesPeriodo(Date inicio, Date fin) {
+		long p = (Long) null;
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 					"obligatorio", new HashMap());
 			EntityManager em = emf.createEntityManager();
+			try {
+				em.getTransaction().begin();
 
-			em.getTransaction().begin();
+				p = (Long) em
+						.createQuery(
+								"SELECT SUM(x.costoReparacion) FROM Presupuesto x "
+										+ "WHERE x.aceptado = true "
+										+ "AND x.fecha BETWEEN :start AND :end")
+						.setParameter("start", inicio, TemporalType.DATE)
+						.setParameter("end", fin, TemporalType.DATE)
+						.getResultList().get(0);
 
-			long p = (Long) em
-					.createQuery(
-							"SELECT SUM(x.costoReparacion) FROM Presupuesto x "
-									+ "WHERE x.aceptado = true "
-									+ "AND x.fecha BETWEEN :start AND :end")
-					.setParameter("start", inicio, TemporalType.DATE)
-					.setParameter("end", fin, TemporalType.DATE)
-					.getResultList().get(0);
-
-			em.getTransaction().commit();
-			em.close();
-			emf.close();
-
-			return p;
-		} catch (javax.persistence.RollbackException ex) {
-			System.out.println("Error: " + ex.getMessage());
-			return (Long) null;
+				em.getTransaction().commit();
+			} catch (javax.persistence.RollbackException ex) {
+				System.out.println("Error: " + ex.getMessage());
+			} finally {
+				em.close();
+				emf.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return p;
 	}
 }
