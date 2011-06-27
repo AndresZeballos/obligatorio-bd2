@@ -1,6 +1,6 @@
 package taller;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -78,6 +78,13 @@ public class Presupuesto {
 
 	public void setAuto(Auto auto) {
 		this.auto = auto;
+	}
+
+	@Override
+	public String toString() {
+		return "Presupuesto [fecha=" + fecha + ", tiempoReparacion="
+				+ tiempoReparacion + ", costoReparacion=" + costoReparacion
+				+ ", aceptado=" + aceptado + ", auto=" + auto + "]";
 	}
 
 }
