@@ -9,50 +9,80 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TemporalType;
 
+import taller.Auto;
 import taller.Cliente;
 import taller.Presupuesto;
 
 public class CompCliente {
 
+	public void altaCliente(String nombre, String apellido, String direccion, int telefono, List<Auto> autos){
+		//asumimos que los autos que se pasan por parametro ya existen en la BD
+		//no se hace control sobre duplicados de personas ya que no se cuenta con el documento de la misma
+		try {
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
+					"obligatorio", new HashMap());
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+			Cliente cliente = new Cliente(nombre, apellido, direccion, telefono, autos);
+			em.persist(cliente);
+			em.getTransaction().commit();			
+			em.close();
+			emf.close();
+		}
+		catch (javax.persistence.RollbackException ex)
+		{
+			System.out.println("Error: " + ex.getMessage());
+		}
+	}
+	
 	@SuppressWarnings("rawtypes")
 	public void bajaCliente(Cliente cliente, Date baja) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(
-				"obligatorio", new HashMap());
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-
-		cliente.setBaja(baja);
-
-		em.getTransaction().commit();
-		em.close();
-		emf.close();
+		try{
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
+					"obligatorio", new HashMap());
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+	
+			cliente.setBaja(baja);
+	
+			em.getTransaction().commit();
+			em.close();
+			emf.close();
+		}catch(javax.persistence.RollbackException ex)
+		{
+			System.out.println("Error: " + ex.getMessage());
+		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<Presupuesto> reparacionesCliente(Cliente cliente, Date inicio,
 			Date fin) {
-
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory(
-				"obligatorio", new HashMap());
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-
-		List<Presupuesto> p = (List<Presupuesto>) em
-				.createQuery(
-						"SELECT x FROM Presupuesto x, Auto a "
-								+ "WHERE a.cliente.id = :id "
-								+ "AND x.auto.id = a.id "
-								+ "AND x.aceptado = true "
-								+ "AND x.fecha BETWEEN :start AND :end ORDER BY x.fecha")
-				.setParameter("start", inicio, TemporalType.DATE)
-				.setParameter("end", fin, TemporalType.DATE)
-				.setParameter("id", cliente.getId()).getResultList();
-
-		em.getTransaction().commit();
-
-		em.close();
-		emf.close();
-
-		return p;
+		try{
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
+					"obligatorio", new HashMap());
+			EntityManager em = emf.createEntityManager();
+			em.getTransaction().begin();
+	
+			List<Presupuesto> p = (List<Presupuesto>) em
+					.createQuery(
+							"SELECT x FROM Presupuesto x, Auto a "
+									+ "WHERE a.cliente.id = :id "
+									+ "AND x.auto.id = a.id "
+									+ "AND x.aceptado = true "
+									+ "AND x.fecha BETWEEN :start AND :end ORDER BY x.fecha")
+					.setParameter("start", inicio, TemporalType.DATE)
+					.setParameter("end", fin, TemporalType.DATE)
+					.setParameter("id", cliente.getId()).getResultList();
+	
+			em.getTransaction().commit();
+	
+			em.close();
+			emf.close();
+			return p;
+		}catch(javax.persistence.RollbackException ex)
+		{
+			System.out.println("Error: " + ex.getMessage());
+			return null;
+		}
 	}
 }

@@ -33,6 +33,14 @@ public class Cliente {
 	public Cliente() {
 
 	}
+	
+	public Cliente(String nombre, String apellido, String direccion, int telefono, List<Auto> autos){
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.autos = autos;
+	}
 
 	public int getId() {
 		return id;
