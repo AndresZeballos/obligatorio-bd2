@@ -45,7 +45,7 @@ public class CompPresupuesto {
 
 	@SuppressWarnings({ "rawtypes" })
 	public long reparacionesPeriodo(Date inicio, Date fin) {
-		long p = (Long) null;
+		long p = 0;
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 					"obligatorio", new HashMap());
