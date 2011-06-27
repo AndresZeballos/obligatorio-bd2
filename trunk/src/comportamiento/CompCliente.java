@@ -42,6 +42,7 @@ public class CompCliente {
 						"SELECT x FROM Presupuesto x, Auto a "
 								+ "WHERE a.cliente.id = :id "
 								+ "AND x.auto.id = a.id "
+								+ "AND x.aceptado = true "
 								+ "AND x.fecha BETWEEN :start AND :end ORDER BY x.fecha")
 				.setParameter("start", inicio, TemporalType.DATE)
 				.setParameter("end", fin, TemporalType.DATE)
