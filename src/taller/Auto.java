@@ -48,6 +48,17 @@ public class Auto {
 
 	}
 
+	public Auto(String matricula, Date año, String color, String chasis, Marca marca, 
+						Modelo modelo, Cliente cliente){
+		this.matricula = matricula;
+		this.año = año;
+		this.color = color;
+		this.chasis = chasis;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.cliente = cliente;
+	}
+	
 	public int getId() {
 		return id;
 	}
