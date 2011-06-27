@@ -49,5 +49,7 @@ public class PruebaBajaCliente {
 		}
 		em.getTransaction().commit();
 
+		em.close();
+		emf.close();
 	}
 }
