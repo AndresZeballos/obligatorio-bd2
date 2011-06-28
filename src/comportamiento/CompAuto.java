@@ -36,7 +36,7 @@ public class CompAuto {
 		
 				List<Auto> p = (List<Auto>) em
 						.createQuery(
-								"SELECT x FROM Auto a "
+								"SELECT a FROM Auto a "
 										+ "WHERE a.matricula = :matriculaAuto or a.chasis = :chasisAuto")
 						.setParameter("matriculaAuto", matricula)
 						.setParameter("chasisAuto", chasis).getResultList();
