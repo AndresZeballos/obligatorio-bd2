@@ -52,5 +52,10 @@ public class Marca {
 	public void setModelos(List<Modelo> modelos) {
 		this.modelos = modelos;
 	}
+	
+	@Override
+	public String toString() {
+		return "Marca [marca=" + marca + "]";
+	}
 
 }

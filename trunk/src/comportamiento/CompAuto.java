@@ -1,6 +1,5 @@
 package comportamiento;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +24,7 @@ import taller.Modelo;
 
 public class CompAuto {
 	@SuppressWarnings({ "rawtypes" })
-	public void altaAuto(String matricula, Date año, String color, String chasis, Marca marca, Modelo modelo, Cliente cliente){
+	public void altaAuto(String matricula, int año, String color, String chasis, Marca marca, Modelo modelo, Cliente cliente){
 		//se chequea que no existe un auto con igual numero de matricula o chasis, en caso de que ya exista, no hago nada
 		try {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory(
@@ -44,14 +43,21 @@ public class CompAuto {
 				em.getTransaction().commit();
 		
 				//si la lista es nula, es porque el auto no existe
-				if (p==null){
+				if (p.size()==0){
 					//asumimos que la marca, modelo y cliente que se pasan por parametro ya existen en la BD
 					em.getTransaction().begin();
-					Auto auto = new Auto(matricula, año, color, chasis, marca, modelo, cliente);
+					
+					Auto auto = new Auto();
+					auto.setMatricula(matricula);
+					auto.setAño(año);
+					auto.setColor(color);
+					auto.setChasis(chasis);
+					auto.setMarca(marca);
+					auto.setModelo(modelo);
+					auto.setCliente(cliente);
+					
 					em.persist(auto);
 					em.getTransaction().commit();			
-					em.close();
-					emf.close();
 				//si el auto existe, doy el mensaje de error correspondiente	
 				}else{
 					System.out.println("El auto ya existe");
@@ -63,7 +69,7 @@ public class CompAuto {
 				em.close();
 				emf.close();
 			}
-		}catch (Exception ex)
+		}catch (org.hibernate.exception.GenericJDBCException ex)
 		{
 			System.out.println("Error: " + ex.getMessage());
 		}

@@ -1,6 +1,5 @@
 package taller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,11 +20,14 @@ public class Auto {
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
+	
 	private String matricula;
 
 	@Column(name = "anio")
-	private Date año;
+	private int año;
+		
 	private String color;
+	
 	private String chasis;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -48,7 +50,7 @@ public class Auto {
 
 	}
 
-	public Auto(String matricula, Date año, String color, String chasis, Marca marca, 
+	public Auto(String matricula, int año, String color, String chasis, Marca marca, 
 						Modelo modelo, Cliente cliente){
 		this.matricula = matricula;
 		this.año = año;
@@ -75,11 +77,11 @@ public class Auto {
 		this.matricula = matricula;
 	}
 
-	public Date getAño() {
+	public int getAño() {
 		return año;
 	}
 
-	public void setAño(Date año) {
+	public void setAño(int año) {
 		this.año = año;
 	}
 
@@ -131,4 +133,12 @@ public class Auto {
 		this.presupuestos = presupuestos;
 	}
 
+	@Override
+	public String toString() {
+		return "Auto [matricula=" + matricula + ", año="
+				+ año + ", color=" + color
+				+ ", chasis=" + chasis + ", marca=" + marca 
+				+ ", modelo=" + modelo + ", cliente=" + cliente + "]";
+	}
+	
 }
