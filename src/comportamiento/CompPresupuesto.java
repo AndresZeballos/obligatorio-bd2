@@ -83,8 +83,11 @@ public class CompPresupuesto {
 			EntityManager em = emf.createEntityManager();
 			try {
 				em.getTransaction().begin();
-				presupuesto.setAceptado(true);
-				
+				if (presupuesto.isAceptado()){
+					System.out.println("El presupuesto ya esta aceptado");
+				}else{
+					presupuesto.setAceptado(true);
+				}
 				em.getTransaction().commit();
 			}catch(javax.persistence.RollbackException ex)
 			{

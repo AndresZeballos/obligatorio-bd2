@@ -24,7 +24,12 @@ public class CompCliente {
 			EntityManager em = emf.createEntityManager();
 				try{
 					em.getTransaction().begin();
-					Cliente cliente = new Cliente(nombre, apellido, direccion, telefono, autos);
+					Cliente cliente = new Cliente();
+					cliente.setNombre(nombre);
+					cliente.setApellido(apellido);
+					cliente.setDireccion(direccion);
+					cliente.setTelefono(telefono);
+					cliente.setAutos(autos);
 					em.persist(cliente);
 					em.getTransaction().commit();			
 					em.close();
