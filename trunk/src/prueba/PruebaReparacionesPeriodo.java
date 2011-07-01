@@ -22,10 +22,11 @@ public class PruebaReparacionesPeriodo {
 		CompPresupuesto cp = new CompPresupuesto();
 
 		Date start = new Date(Date.UTC(90, 5, 26, 12, 0, 0));
-		Date end = new Date(Date.UTC(112, 5, 26, 12, 0, 0));
+		Date end = new Date(Date.UTC(110, 5, 26, 12, 0, 0));
 
 		long p = cp.reparacionesPeriodo(start, end);
-		System.out.println(p);
+		System.out.println("Los costo total de presupuestos aceptados entre "
+				+ start + " y " + end + " son: " + p);
 
 		em.getTransaction().commit();
 
