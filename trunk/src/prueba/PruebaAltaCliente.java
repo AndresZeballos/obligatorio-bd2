@@ -53,7 +53,7 @@ public class PruebaAltaCliente {
 		Auto auto1 = new Auto();
 		auto1.setMatricula("UnaMatricula01");
 		auto1.setAño(2021);
-		auto1.setColor("Amarillo patito");
+		auto1.setColor("Amarillo");
 		auto1.setChasis("Coche0011");
 		auto1.setMarca(marca);
 		auto1.setModelo(modelo);
@@ -62,7 +62,7 @@ public class PruebaAltaCliente {
 
 		auto2.setMatricula("UnaMatricula02");
 		auto2.setAño(2022);
-		auto2.setColor("Amarillo patito");
+		auto2.setColor("Amarillo");
 		auto2.setChasis("Coche0012");
 		auto2.setMarca(marca);
 		auto2.setModelo(modelo);
