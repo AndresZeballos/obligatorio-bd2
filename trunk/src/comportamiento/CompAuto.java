@@ -3,27 +3,16 @@ package comportamiento;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
-import javax.persistence.Table;
-
 import taller.Auto;
 import taller.Cliente;
-import taller.Presupuesto;
 import taller.Marca;
 import taller.Modelo;
 
 public class CompAuto {
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void altaAuto(String matricula, int año, String color, String chasis, Marca marca, Modelo modelo, Cliente cliente){
 		//se chequea que no existe un auto con igual numero de matricula o chasis, en caso de que ya exista, no hago nada
 		try {
