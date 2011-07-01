@@ -13,7 +13,6 @@ import taller.Cliente;
 import taller.Marca;
 import taller.Modelo;
 
-import comportamiento.CompAuto;
 import comportamiento.CompCliente;
 
 public class PruebaAltaCliente {
@@ -21,6 +20,7 @@ public class PruebaAltaCliente {
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory(
 				"obligatorio", new HashMap());
@@ -36,16 +36,46 @@ public class PruebaAltaCliente {
 
 		em.getTransaction().commit();
 
+		em.getTransaction().begin();
+		Marca marca = em.find(Marca.class, 1);
+		em.getTransaction().commit();
+
+		System.out.println();
+
+		em.getTransaction().begin();
+		Modelo modelo = em.find(Modelo.class, 1);
+		em.getTransaction().commit();
+
+		em.getTransaction().begin();
+
 		CompCliente compCliente = new CompCliente();
-		
-		Auto auto1 = em.find(Auto.class, 1);
-		Auto auto2 = em.find(Auto.class, 2);
+
+		Auto auto1 = new Auto();
+		auto1.setMatricula("UnaMatricula01");
+		auto1.setAño(2021);
+		auto1.setColor("Amarillo patito");
+		auto1.setChasis("Coche0011");
+		auto1.setMarca(marca);
+		auto1.setModelo(modelo);
+
+		Auto auto2 = new Auto();
+
+		auto2.setMatricula("UnaMatricula02");
+		auto2.setAño(2022);
+		auto2.setColor("Amarillo patito");
+		auto2.setChasis("Coche0012");
+		auto2.setMarca(marca);
+		auto2.setModelo(modelo);
+
 		List<Auto> autos = new ArrayList<Auto>();
 		autos.add(auto1);
 		autos.add(auto2);
-		
-		compCliente.altaCliente("Ernesto", "Toledo", "Ecuador M-18 S-08", 26822222, autos);
-		
+
+		compCliente.altaCliente("Ernesto", "Toledo", "Ecuador M-18 S-08",
+				26822222, autos);
+
+		em.getTransaction().commit();
+
 		em.getTransaction().begin();
 
 		System.out.println("Clientes despues del alta:");
@@ -56,7 +86,7 @@ public class PruebaAltaCliente {
 		}
 
 		em.getTransaction().commit();
-		
+
 		em.close();
 		emf.close();
 	}

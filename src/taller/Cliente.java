@@ -25,7 +25,7 @@ public class Cliente {
 	private String direccion;
 	private int telefono;
 	private Date baja;
-	
+
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "auto")
 	private List<Auto> autos;
@@ -33,8 +33,9 @@ public class Cliente {
 	public Cliente() {
 
 	}
-	
-	public Cliente(String nombre, String apellido, String direccion, int telefono, List<Auto> autos){
+
+	public Cliente(String nombre, String apellido, String direccion,
+			int telefono, List<Auto> autos) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.direccion = direccion;

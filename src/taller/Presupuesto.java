@@ -84,7 +84,7 @@ public class Presupuesto {
 	public String toString() {
 		return "Presupuesto [fecha=" + fecha + ", tiempoReparacion="
 				+ tiempoReparacion + ", costoReparacion=" + costoReparacion
-				+ ", aceptado=" + aceptado + ", auto=" + auto + "]";
+				+ ", aceptado=" + aceptado + "]";
 	}
 
 }

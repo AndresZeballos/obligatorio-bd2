@@ -20,14 +20,14 @@ public class Auto {
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
+
 	private String matricula;
 
 	@Column(name = "anio")
 	private int año;
-		
+
 	private String color;
-	
+
 	private String chasis;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -50,8 +50,8 @@ public class Auto {
 
 	}
 
-	public Auto(String matricula, int año, String color, String chasis, Marca marca, 
-						Modelo modelo, Cliente cliente){
+	public Auto(String matricula, int año, String color, String chasis,
+			Marca marca, Modelo modelo, Cliente cliente) {
 		this.matricula = matricula;
 		this.año = año;
 		this.color = color;
@@ -60,7 +60,7 @@ public class Auto {
 		this.modelo = modelo;
 		this.cliente = cliente;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -135,10 +135,9 @@ public class Auto {
 
 	@Override
 	public String toString() {
-		return "Auto [matricula=" + matricula + ", año="
-				+ año + ", color=" + color
-				+ ", chasis=" + chasis + ", marca=" + marca 
+		return "Auto [matricula=" + matricula + ", año=" + año + ", color="
+				+ color + ", chasis=" + chasis + ", marca=" + marca
 				+ ", modelo=" + modelo + ", cliente=" + cliente + "]";
 	}
-	
+
 }

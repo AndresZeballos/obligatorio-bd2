@@ -26,12 +26,12 @@ public class PruebaReparacionesCliente {
 		CompCliente cp = new CompCliente();
 
 		Cliente cliente = em.find(Cliente.class, 2);
-		Date start = new Date(Date.UTC(110, 5, 26, 12, 0, 0));
-		Date end = new Date(Date.UTC(112, 5, 26, 12, 0, 0));
+		Date start = new Date(Date.UTC(100, 5, 26, 12, 0, 0));
+		Date end = new Date(Date.UTC(110, 5, 26, 12, 0, 0));
 
 		List<Presupuesto> l3 = cp.reparacionesCliente(cliente, start, end);
 		for (int i = 0; i < l3.size(); i++) {
-			System.out.println(l3.get(i).getFecha());
+			System.out.println(l3.get(i));
 		}
 		em.getTransaction().commit();
 

@@ -34,7 +34,7 @@ public class PruebaAltaPresupuesto {
 
 		Date fecha = new Date(Date.UTC(111, 5, 26, 12, 0, 0));
 		System.out.println(fecha);
-		
+
 		int tiempoReparacion = 6;
 		int costoReparacion = 7500;
 
